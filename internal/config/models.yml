@@ -1,0 +1,31 @@
+models:
+  grok_4:
+    name: grok_4
+    model: grok-4-0709
+    description: A model that uses Grok for text parsing and extraction.
+    type: grok
+    version: 4.0
+    base_url: https://api.x.ai
+    max_tokens: 2048
+    rpm: 60
+    timeout: 120
+  grok_3:
+    name: grok_3
+    model: grok-3
+    description: A model that uses Grok for text parsing and extraction.
+    type: grok
+    version: 3.0
+    base_url: https://api.x.ai
+    max_tokens: 1024
+    rpm: 120
+    timeout: 60
+  grok_3_mini:
+    name: grok_3_mini
+    model: grok-3-mini
+    description: A smaller version of Grok 3 for lightweight text parsing tasks.
+    type: grok
+    version: 3.0
+    base_url: https://api.x.ai
+    max_tokens: 512
+    rpm: 240
+    timeout: 30
