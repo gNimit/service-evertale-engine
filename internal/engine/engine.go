@@ -3,16 +3,22 @@ package engine
 import (
 	"sync"
 
-	"github.com/adrem/service-evertale-engine/internal/engine/state"
+	"github.com/gNimit/service-evertale-engine/internal/engine/state"
 )
 
-type Command struct {
-
-}
-
 type Engine struct {
-	mu sync.RWMutex
+	mu    sync.RWMutex
 	World *state.World
 }
 
-func NewEngine() *Engine
+func NewEngine() *Engine {
+	return &Engine{
+		mu:    sync.RWMutex{},
+		World: nil,
+	}
+}
+
+func (e *Engine) Run() error {
+	// TODO: Implement run
+	return nil
+}

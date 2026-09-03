@@ -1,5 +1,7 @@
 package state
 
+import "errors"
+
 type Direction string
 
 const (
@@ -14,27 +16,51 @@ const (
 )
 
 type Edge struct {
-	TargetTileId string `json:"targetTileId"`
+	TargetTileId       string    `json:"targetTileId"`
 	TargetTilePosition *Position `json:"targetTilePosition"`
-	TravelCost uint64 `json:"travelCost"`
+	TravelCost         uint64    `json:"travelCost"`
 }
 
 type Tile struct {
-	ID string `json:"id"`
-	Name string `json:"name"`
-	Description string `json:"description"`
-	Glyph rune `json:"glyph"`
-	Color string `json:"color"`
-	Position Position `json:"position"`
-	EntityIds []string `json:"entityIds"`
-	Edges map[Direction]*Edge `json:"edges"`
+	ID          string              `json:"id"`
+	Name        string              `json:"name"`
+	Description string              `json:"description"`
+	Glyph       rune                `json:"glyph"`
+	Color       string              `json:"color"`
+	Position    Position            `json:"position"`
+	EntityIds   map[string]bool     `json:"entityIds"`
+	Edges       map[Direction]*Edge `json:"edges"`
 }
 
-func NewTile(id, name, description string, position Position) *Tile
+func NewTile(id, name, description string, position Position) *Tile {
+	return &Tile{
+		ID:          id,
+		Name:        name,
+		Description: description,
+		Glyph:       ' ',
+		Color:       "#000000",
+		Position:    position,
+		EntityIds:   make(map[string]bool),
+		Edges:       make(map[Direction]*Edge),
+	}
+}
 
-func (t *Tile) AddEntity(entityId string) error
+func (t *Tile) AddEntity(entityId string) error {
+	if t.EntityIds == nil {
+		t.EntityIds = make(map[string]bool)
+	}
 
-func (t *Tile) RemoveEntity(entityId string) error
+	if t.EntityIds[entityId] {
+		return errors.New("entity already exists")
+	}
+	t.EntityIds[entityId] = true
+	return nil
+}
 
-
-
+func (t *Tile) RemoveEntity(entityId string) error {
+	if !t.EntityIds[entityId] {
+		return errors.New("entity does not exist")
+	}
+	delete(t.EntityIds, entityId)
+	return nil
+}

@@ -1,6 +1,6 @@
 package entity
 
 type System interface {
-	Name()
-	Update(entities []*entities)
+	Name() string
+	Update(entities []*Entity)
 }

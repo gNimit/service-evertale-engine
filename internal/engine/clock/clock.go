@@ -1,16 +1,16 @@
 package clock
 
 type Tick struct {
-	Name string `json:"name"`
+	Name    string `json:"name"`
 	Current uint64 `json:"current"`
 	Max     uint64 `json:"max"`
 }
 
 type Clock struct {
-	ID         string `json:"id"`
-	Name       string `json:"name"`
-	Tick       Tick   `json:"tick"`
-	TickCount  uint64 `json:"tickCount"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Tick      Tick   `json:"tick"`
+	TickCount uint64 `json:"tickCount"`
 }
 
 func NewClock() *Clock

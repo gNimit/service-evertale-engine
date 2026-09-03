@@ -3,9 +3,9 @@ package entity
 type ComponentType string
 
 const (
-	CompStat ComponentType = "stat"
+	CompStat      ComponentType = "stat"
 	CompInventory ComponentType = "inventory"
-	CompTraits ComponentType = "traits"
+	CompTraits    ComponentType = "traits"
 	CompAiContext ComponentType = "aiContext"
 )
 
@@ -14,7 +14,7 @@ type Component interface {
 }
 
 type StatsComponent struct {
-	Values 	map[string]int `json:"values"`	
+	Values map[string]int `json:"values"`
 }
 
 func (s *StatsComponent) Type() ComponentType
@@ -23,7 +23,9 @@ func (s *StatsComponent) Get(stat string) int
 
 func (s *StatsComponent) Set(stat string, value int)
 
-type InventoryComponent struct
+type InventoryComponent struct {
+	Items map[string]int `json:"items"`
+}
 
 func (i *InventoryComponent) Type() ComponentType
 
